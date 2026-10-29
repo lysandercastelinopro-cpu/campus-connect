@@ -67,11 +67,11 @@ const MessageInput = () => {
         </div>
       )}
 
-      <form onSubmit={handleSendMessage} className="flex items-center gap-2">
-        <div className="flex-1 flex items-center gap-2">
+      <form onSubmit={handleSendMessage} className="flex items-center gap-2 w-full">
+        <div className="flex-1 flex items-center gap-2 min-w-0">
           <input
             type="text"
-            className="flex-1 input bg-[#1a1c1a] border-[#262626] text-[#FFFFFF] placeholder:text-[#888888] rounded-2xl py-3 px-4 focus:outline-none focus:border-[#026439] focus:ring-1 focus:ring-[#026439] transition-all font-normal text-sm"
+            className="flex-1 min-w-0 input bg-[#1a1c1a] border-[#262626] text-[#FFFFFF] placeholder:text-[#888888] rounded-2xl py-3 px-4 focus:outline-none focus:border-[#026439] focus:ring-1 focus:ring-[#026439] transition-all font-normal text-[16px] sm:text-sm"
             placeholder="Type a message..."
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -85,7 +85,7 @@ const MessageInput = () => {
           />
           <button
             type="button"
-            className={`btn btn-circle btn-sm sm:btn-md border-[#262626] bg-[#1a1c1a] hover:bg-[#262626] transition-colors ${imagePreview ? "text-[#026439]" : "text-[#888888] hover:text-[#FFFFFF]"
+            className={`btn btn-circle btn-sm sm:btn-md shrink-0 border-[#262626] bg-[#1a1c1a] hover:bg-[#262626] transition-colors ${imagePreview ? "text-[#026439]" : "text-[#888888] hover:text-[#FFFFFF]"
               }`}
             onClick={() => fileInputRef.current?.click()}
             title="Attach image"
@@ -95,7 +95,7 @@ const MessageInput = () => {
           {/* Send icon button in #026439 green accent */}
           <button
             type="submit"
-            className="btn btn-circle btn-sm sm:btn-md bg-[#026439] hover:bg-[#014d2b] border-[#026439] text-[#FFFFFF] disabled:bg-[#1a1c1a] disabled:text-[#555555] disabled:border-[#262626] transition-all shadow-sm"
+            className="btn btn-circle btn-sm sm:btn-md shrink-0 bg-[#026439] hover:bg-[#014d2b] border-[#026439] text-[#FFFFFF] disabled:bg-[#1a1c1a] disabled:text-[#555555] disabled:border-[#262626] transition-all shadow-sm"
             disabled={!text.trim() && !imagePreview}
             title="Send message"
           >
