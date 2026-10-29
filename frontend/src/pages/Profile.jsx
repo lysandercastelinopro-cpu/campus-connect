@@ -57,33 +57,35 @@ const Profile = () => {
             </div>
 
             {/* Image container */}
-            <div className="p-4 mx-auto flex justify-center relative">
-              <img
-                id="showImage"
-                className="size-32 object-cover rounded-full border-4 border-[#262626]"
-                src={selectedImage || authUser?.profilePic || "/profile.jpg"}
-                alt="Profile"
-              />
-
-              <label
-                htmlFor="avatar-upload"
-                className={`
-                  absolute bottom-4 right-4 bg-[#026439] hover:bg-[#014d2b] hover:scale-105 p-2.5 rounded-full cursor-pointer transition-all duration-200 text-[#FFFFFF] shadow-md ${
-                    isUpdatingProfile ? "animate-pulse pointer-events-none" : ""
-                  }
-                `}
-                title="Change Photo"
-              >
-                <Camera className="w-5 h-5" />
-                <input
-                  type="file"
-                  id="avatar-upload"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  disabled={isUpdatingProfile}
+            <div className="p-4 mx-auto flex justify-center relative shrink-0">
+              <div className="relative size-32 shrink-0 aspect-square">
+                <img
+                  id="showImage"
+                  className="size-32 w-32 h-32 aspect-square shrink-0 object-cover rounded-full border-4 border-[#262626]"
+                  src={selectedImage || authUser?.profilePic || "/profile.jpg"}
+                  alt="Profile"
                 />
-              </label>
+
+                <label
+                  htmlFor="avatar-upload"
+                  className={`
+                    absolute bottom-1 right-1 bg-[#026439] hover:bg-[#014d2b] hover:scale-105 p-2.5 rounded-full cursor-pointer transition-all duration-200 text-[#FFFFFF] shadow-md ${
+                      isUpdatingProfile ? "animate-pulse pointer-events-none" : ""
+                    }
+                  `}
+                  title="Change Photo"
+                >
+                  <Camera className="w-5 h-5" />
+                  <input
+                    type="file"
+                    id="avatar-upload"
+                    className="hidden"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    disabled={isUpdatingProfile}
+                  />
+                </label>
+              </div>
             </div>
 
             <p className="text-xs text-[#888888] flex items-center justify-center mt-1 text-center">

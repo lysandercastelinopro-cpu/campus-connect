@@ -89,3 +89,13 @@ body {
     font-size: 16px !important;
   }
 }
+
+/* Universal circular avatar preservation - prevents elongation or stretching */
+img.rounded-full,
+.avatar img,
+img[alt="Profile"],
+img[alt="profile pic"] {
+  aspect-ratio: 1 / 1 !important;
+  object-fit: cover !important;
+  flex-shrink: 0 !important;
+}

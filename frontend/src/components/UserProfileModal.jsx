@@ -65,11 +65,11 @@ const UserProfileModal = ({
         <div className="px-6 pb-6 pt-0 flex flex-col -mt-12">
           {/* Avatar & Main Info Row */}
           <div className="flex items-end justify-between gap-4 mb-4">
-            <div className="relative">
+            <div className="relative size-24 shrink-0 aspect-square">
               <img
                 src={userDetails.profilePic || "/profile.jpg"}
                 alt={userDetails.name}
-                className="size-24 rounded-full object-cover border-4 border-[#1a1c1a] shadow-lg bg-[#131413]"
+                className="size-24 w-24 h-24 aspect-square shrink-0 rounded-full object-cover border-4 border-[#1a1c1a] shadow-lg bg-[#131413]"
               />
             </div>
 
