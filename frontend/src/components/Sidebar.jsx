@@ -30,7 +30,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className="overflow-y-auto w-full p-3 space-y-1">
+      <div className="overflow-y-auto w-full p-3 space-y-1 pb-20 md:pb-3">
         <div className="mb-3">
           <input
             type="text"

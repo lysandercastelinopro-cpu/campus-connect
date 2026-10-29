@@ -44,8 +44,8 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4.05rem)] flex items-center justify-center p-4 bg-[#131413]">
-      <div className="bg-[#1a1c1a] border border-[#262626] rounded-2xl shadow-xl max-w-4xl w-full my-6">
+    <div className="h-full w-full bg-[#131413] text-[#FFFFFF] overflow-y-auto flex flex-col items-center p-4 md:p-8 pb-28 md:pb-8">
+      <div className="bg-[#1a1c1a] border border-[#262626] rounded-2xl shadow-xl max-w-4xl w-full my-4 md:my-6 shrink-0">
         <div className="block md:flex rounded-2xl overflow-hidden">
           {/* Avatar & Summary side */}
           <div className="w-full md:w-2/5 p-6 lg:p-8 relative flex flex-col items-center justify-start border-b md:border-b-0 md:border-r border-[#262626]">

@@ -67,7 +67,7 @@ const Search = () => {
     const hasActiveFilters = Boolean(query.trim()) || selectedTag !== "All";
 
     return (
-        <div className="h-full w-full bg-[#131413] text-[#FFFFFF] overflow-y-auto flex flex-col items-center p-4 md:p-8">
+        <div className="h-full w-full bg-[#131413] text-[#FFFFFF] overflow-y-auto flex flex-col items-center p-4 md:p-8 pb-24 md:pb-8">
             <div className="w-full max-w-2xl flex flex-col h-full">
                 {/* Header Section */}
                 <div className="mb-4 flex flex-col gap-1">

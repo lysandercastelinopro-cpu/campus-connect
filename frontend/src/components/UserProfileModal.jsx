@@ -48,7 +48,7 @@ const UserProfileModal = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
       <div
-        className="relative w-full max-w-lg bg-[#1a1c1a] border border-[#262626] rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+        className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-[#1a1c1a] border border-[#262626] rounded-3xl shadow-2xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Banner with header accents */}
