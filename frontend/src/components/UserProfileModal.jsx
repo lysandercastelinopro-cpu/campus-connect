@@ -62,67 +62,67 @@ const UserProfileModal = ({
         </div>
 
         {/* Profile Content */}
-        <div className="px-6 pb-6 pt-0 flex flex-col -mt-12">
-          {/* Avatar & Main Info Row */}
-          <div className="flex items-end justify-between gap-4 mb-4">
-            <div className="relative size-24 shrink-0 aspect-square">
+        <div className="px-5 sm:px-6 pb-6 pt-0 flex flex-col -mt-12">
+          {/* Circular Avatar */}
+          <div className="flex items-end justify-between gap-3 mb-3">
+            <div className="relative size-20 sm:size-24 shrink-0 aspect-square rounded-full border-4 border-[#1a1c1a] overflow-hidden shadow-lg bg-[#131413]">
               <img
                 src={userDetails.profilePic || "/profile.jpg"}
                 alt={userDetails.name}
-                className="size-24 w-24 h-24 aspect-square shrink-0 rounded-full object-cover border-4 border-[#1a1c1a] shadow-lg bg-[#131413]"
+                className="w-full h-full aspect-square object-cover rounded-full"
               />
-            </div>
-
-            {/* Quick Action Buttons */}
-            <div className="flex items-center gap-2 mb-2">
-              <button
-                type="button"
-                onClick={() => {
-                  onToggleFollow(userDetails.id);
-                  setUserDetails((prev) => ({
-                    ...prev,
-                    isFollowing: !prev.isFollowing
-                  }));
-                }}
-                className={`btn btn-sm rounded-xl px-4 font-medium transition-all cursor-pointer ${userDetails.isFollowing
-                    ? "bg-[#262626] border-[#262626] text-[#FFFFFF] hover:bg-[#333333]"
-                    : "bg-[#026439] hover:bg-[#014d2b] border-[#026439] text-[#FFFFFF]"
-                  }`}
-              >
-                {userDetails.isFollowing ? (
-                  <>
-                    <UserCheck className="size-4 mr-1.5" />
-                    Connected
-                  </>
-                ) : (
-                  <>
-                    <UserPlus className="size-4 mr-1.5" />
-                    Connect
-                  </>
-                )}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  onStartChat(userDetails);
-                  onClose();
-                }}
-                className="btn btn-sm bg-[#026439] hover:bg-[#014d2b] border-[#026439] text-[#FFFFFF] rounded-xl px-3.5 cursor-pointer shadow-sm"
-                title="Send Message"
-              >
-                <MessageCircle className="size-4 mr-1.5" />
-                Message
-              </button>
             </div>
           </div>
 
           {/* Names */}
-          <div className="mb-4">
+          <div className="mb-3.5">
             <div className="flex items-center gap-2">
               <h2 className="text-xl font-bold text-[#FFFFFF]">{userDetails.name}</h2>
             </div>
             <p className="text-xs text-[#888888]">@{userDetails.username}</p>
+          </div>
+
+          {/* Quick Action Buttons: 2-column grid to always fit on mobile without scrolling */}
+          <div className="grid grid-cols-2 gap-2.5 mb-4 w-full">
+            <button
+              type="button"
+              onClick={() => {
+                onToggleFollow(userDetails.id);
+                setUserDetails((prev) => ({
+                  ...prev,
+                  isFollowing: !prev.isFollowing
+                }));
+              }}
+              className={`w-full btn btn-sm rounded-xl font-medium transition-all cursor-pointer flex items-center justify-center ${userDetails.isFollowing
+                  ? "bg-[#262626] border-[#262626] text-[#FFFFFF] hover:bg-[#333333]"
+                  : "bg-[#026439] hover:bg-[#014d2b] border-[#026439] text-[#FFFFFF]"
+                }`}
+            >
+              {userDetails.isFollowing ? (
+                <>
+                  <UserCheck className="size-4 mr-1.5 shrink-0" />
+                  <span className="truncate">Connected</span>
+                </>
+              ) : (
+                <>
+                  <UserPlus className="size-4 mr-1.5 shrink-0" />
+                  <span className="truncate">Connect</span>
+                </>
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                onStartChat(userDetails);
+                onClose();
+              }}
+              className="w-full btn btn-sm bg-[#026439] hover:bg-[#014d2b] border-[#026439] text-[#FFFFFF] rounded-xl cursor-pointer shadow-sm flex items-center justify-center"
+              title="Send Message"
+            >
+              <MessageCircle className="size-4 mr-1.5 shrink-0" />
+              <span className="truncate">Message</span>
+            </button>
           </div>
 
           {/* Stats Bar if available */}
