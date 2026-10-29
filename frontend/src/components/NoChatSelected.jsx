@@ -1,4 +1,4 @@
-import { MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const NoChatSelected = () => {
   return (
@@ -6,7 +6,7 @@ const NoChatSelected = () => {
       <div className="max-w-md text-center flex flex-col items-center">
         {/* Center icon badge matching Search page design */}
         <div className="size-20 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-4 text-emerald-500">
-          <MessageCircle className="size-9 stroke-[2.2]" />
+          <ArrowRight className="size-9 stroke-[2.2]" />
         </div>
 
         <h2 className="text-xl font-bold tracking-wide text-[#FFFFFF] mb-2">Your messages</h2>

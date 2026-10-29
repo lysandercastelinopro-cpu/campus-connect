@@ -57,7 +57,7 @@ const Sidebar = () => {
                   alt={user.name}
                   className="size-11 object-cover rounded-full border border-[#262626]"
                 />
-                {onlineUsers.includes(user.id) && (
+                {onlineUsers?.includes(user.id) && (
                   <span className="absolute bottom-0 right-0 size-3 bg-[#026439] rounded-full ring-2 ring-[#131413]" />
                 )}
               </div>
@@ -65,7 +65,7 @@ const Sidebar = () => {
               <div className="flex-1 text-left min-w-0">
                 <div className="font-medium text-sm truncate text-[#FFFFFF]">{user.name}</div>
                 <div className="text-xs text-[#888888]">
-                  {onlineUsers.includes(user.id) ? (
+                  {onlineUsers?.includes(user.id) ? (
                     <span className="text-[#026439]">Online</span>
                   ) : (
                     "Offline"

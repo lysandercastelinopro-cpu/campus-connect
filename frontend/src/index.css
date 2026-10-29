@@ -67,3 +67,18 @@ body {
   border: 1px solid #262626 !important;
   color: #ffffff !important;
 }
+
+/* Force dock avatar to always be a perfect circle */
+.dock .dock-avatar {
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  min-width: 1.75rem !important;
+  min-height: 1.75rem !important;
+  max-width: 1.75rem !important;
+  max-height: 1.75rem !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 9999px !important;
+  object-fit: cover !important;
+  display: block !important;
+  overflow: hidden !important;
+}

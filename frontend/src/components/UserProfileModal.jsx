@@ -6,7 +6,6 @@ import {
   UserCheck,
   Calendar,
   BookOpen,
-  GraduationCap,
   Users,
   Loader2
 } from "lucide-react";
@@ -85,11 +84,10 @@ const UserProfileModal = ({
                     isFollowing: !prev.isFollowing
                   }));
                 }}
-                className={`btn btn-sm rounded-xl px-4 font-medium transition-all cursor-pointer ${
-                  userDetails.isFollowing
+                className={`btn btn-sm rounded-xl px-4 font-medium transition-all cursor-pointer ${userDetails.isFollowing
                     ? "bg-[#262626] border-[#262626] text-[#FFFFFF] hover:bg-[#333333]"
                     : "bg-[#026439] hover:bg-[#014d2b] border-[#026439] text-[#FFFFFF]"
-                }`}
+                  }`}
               >
                 {userDetails.isFollowing ? (
                   <>
@@ -123,7 +121,6 @@ const UserProfileModal = ({
           <div className="mb-4">
             <div className="flex items-center gap-2">
               <h2 className="text-xl font-bold text-[#FFFFFF]">{userDetails.name}</h2>
-              <GraduationCap className="size-4 text-[#026439]" />
             </div>
             <p className="text-xs text-[#888888]">@{userDetails.username}</p>
           </div>

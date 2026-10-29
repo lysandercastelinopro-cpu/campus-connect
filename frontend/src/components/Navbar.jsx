@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import {
   MessageCircle,
-  House,
+  MessageCircleMoreIcon,
   Search,
   LogIn,
   Bell
@@ -9,7 +9,7 @@ import {
 import { useAuthStore } from "../store/useAuthStore";
 import { useNotificationStore } from "../store/useNotificationStore";
 
-const Navbar = () => {
+const Navbar = ({ hideMobileNav = false }) => {
   const { authUser } = useAuthStore();
   const { unreadCount } = useNotificationStore();
   const pathName = useLocation().pathname;
@@ -17,13 +17,15 @@ const Navbar = () => {
   return (
     <>
       {/* Mobile dock */}
-      <div className="dock bg-[#131413] border-t border-[#262626] text-[#888888] md:hidden z-40">
+      <div className={`dock bg-[#131413] border-t border-[#262626] text-[#888888] md:hidden z-40 transition-all duration-200 ${
+        hideMobileNav ? "!hidden !pointer-events-none" : ""
+      }`}>
         <Link
           to="/"
           className={`flex flex-col items-center justify-center py-2 transition-colors ${pathName === "/" ? "text-[#026439]" : "text-[#888888] hover:text-[#FFFFFF]"
             }`}
         >
-          <House className="size-5 stroke-[2] stroke-linecap-round stroke-linejoin-round" />
+          <MessageCircleMoreIcon className="size-5 stroke-[2] stroke-linecap-round stroke-linejoin-round" />
           <span className="dock-label text-xs mt-1 font-medium">Home</span>
         </Link>
 
@@ -60,18 +62,18 @@ const Navbar = () => {
           className={`flex flex-col items-center justify-center py-2 transition-colors ${pathName === "/profile" ? "text-[#026439]" : "text-[#888888] hover:text-[#FFFFFF]"
             }`}
         >
-          <div className="w-8 h-8 rounded-full border border-[#262626] bg-[#1a1c1a] text-[#FFFFFF] flex items-center justify-center font-semibold text-xs overflow-hidden">
-            {authUser?.profilePic ? (
-              <img
-                id="showImage"
-                className="size-8 object-cover rounded-full"
-                src={authUser?.profilePic}
-                alt="Profile"
-              />
-            ) : (
-              authUser?.name?.charAt(0).toUpperCase()
-            )}
-          </div>
+          {authUser?.profilePic ? (
+            <img
+              id="showImage"
+              className="dock-avatar rounded-full object-cover border-2 border-[#262626] shrink-0"
+              src={authUser.profilePic}
+              alt="Profile"
+            />
+          ) : (
+            <div className="dock-avatar rounded-full border-2 border-[#262626] bg-[#1a1c1a] text-[#FFFFFF] flex items-center justify-center font-semibold text-xs shrink-0">
+              {authUser?.name?.charAt(0).toUpperCase()}
+            </div>
+          )}
           <span className="dock-label text-xs mt-1 text-[#888888] font-medium">Profile</span>
         </Link>
       </div>
@@ -98,7 +100,7 @@ const Navbar = () => {
                 }`}
               title="Home"
             >
-              <House className="size-5 stroke-[2] stroke-linecap-round stroke-linejoin-round" />
+              <MessageCircleMoreIcon className="size-5 stroke-[2] stroke-linecap-round stroke-linejoin-round" />
             </Link>
 
             <Link

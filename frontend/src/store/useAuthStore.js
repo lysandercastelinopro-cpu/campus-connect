@@ -4,16 +4,6 @@ import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 import { useNotificationStore } from "./useNotificationStore";
 
-const BASE_URL =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:3000/api/"
-    : "/";
-
-const SOCKET_URL =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:3000"
-    : "/";
-
 export const useAuthStore = create((set, get) => ({
   authUser: null,
   isSigningIn: false,
@@ -101,25 +91,38 @@ export const useAuthStore = create((set, get) => ({
   },
 
   connectSocket: () => {
-    const { authUser } = get();
-    if (!authUser || get().socket?.connected) return;
+    const { authUser, socket } = get();
+    if (!authUser?.id) return;
+    if (socket?.connected) return;
 
-    const socket = io(SOCKET_URL, {
-      query: { userId: authUser.id },
+    if (socket) {
+      socket.disconnect();
+    }
+
+    const socketUrl =
+      import.meta.env.MODE === "development"
+        ? "http://localhost:3000"
+        : (typeof window !== "undefined" ? window.location.origin : "/");
+
+    const newSocket = io(socketUrl, {
+      query: { userId: String(authUser.id) },
+      transports: ["websocket", "polling"],
     });
-    socket.connect();
 
-    set({ socket: socket });
+    set({ socket: newSocket });
 
-    socket.on("getOnlineUsers", (userIds) => {
-      set({ onlineUsers: userIds.map(Number) });
+    newSocket.on("getOnlineUsers", (userIds) => {
+      const validNumbers = (userIds || [])
+        .map(Number)
+        .filter((id) => !isNaN(id));
+      set({ onlineUsers: validNumbers });
     });
 
-    socket.on("newNotification", (notification) => {
+    newSocket.on("newNotification", (notification) => {
       useNotificationStore.getState().addNotification(notification);
     });
 
-    socket.on("connectionUpdated", async ({ partnerId, isFollowing, connectionStatus }) => {
+    newSocket.on("connectionUpdated", async ({ partnerId, isFollowing, connectionStatus }) => {
       const followerStoreModule = await import("./useFollowerStore");
       if (followerStoreModule && followerStoreModule.useFollowerStore) {
         followerStoreModule.useFollowerStore.getState().updateUserConnectionState(partnerId, isFollowing, connectionStatus);
@@ -132,6 +135,10 @@ export const useAuthStore = create((set, get) => ({
   },
 
   disconnectSocket: () => {
-    if (get().socket?.connected) get().socket.disconnect();
+    const { socket } = get();
+    if (socket) {
+      socket.disconnect();
+      set({ socket: null, onlineUsers: [] });
+    }
   },
 }));

@@ -519,7 +519,7 @@ export const toggleFollow = async (req, res) => {
                         userId: targetUserIntId,
                         senderId: loggedInUserId,
                         type: "FOLLOW_REQUEST",
-                        content: `${req.user.name || req.user.username} connected with you on CampusConnect.`,
+                        content: `${req.user.name || req.user.username} connected with you on Campus Connect.`,
                         read: false
                     },
                     include: {
