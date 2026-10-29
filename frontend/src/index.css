@@ -1,5 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 @import "tailwindcss";
 
 @plugin "daisyui" {
-  themes: black --default, light;
+  themes: dark --default, light;
+}
+
+:root {
+  --app-bg: #131413;
+  --app-primary: #026439;
+  --app-text: #ffffff;
+  --app-muted: #888888;
+  --app-border: #262626;
+
+  --color-primary: #026439;
+  --color-primary-content: #ffffff;
+  --color-base-100: #131413;
+  --color-base-200: #191b19;
+  --color-base-300: #262626;
+  --color-base-content: #ffffff;
+}
+
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  border-color: #262626;
+}
+
+body {
+  background-color: #131413;
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 400;
+  min-height: 100vh;
+}
+
+.btn-primary {
+  background-color: #026439 !important;
+  border-color: #026439 !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: #014d2b !important;
+  border-color: #014d2b !important;
+}
+
+.chat .chat-bubble {
+  border-radius: 18px !important;
+  min-height: unset !important;
+}
+
+.chat-bubble::before {
+  display: none !important;
+  content: none !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+.chat-end .chat-bubble {
+  background-color: #026439 !important;
+  color: #ffffff !important;
+}
+
+.chat-start .chat-bubble {
+  background-color: #1f221f !important;
+  border: 1px solid #262626 !important;
+  color: #ffffff !important;
 }

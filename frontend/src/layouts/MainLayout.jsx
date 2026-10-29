@@ -4,13 +4,13 @@ import Navbar from '../components/Navbar'
 
 const MainLayout = () => {
     return (
-        <div className="flex h-screen w-full overflow-hidden bg-base-100">
+        <div className="flex h-screen w-full overflow-hidden bg-[#131413]">
             <Navbar />
-            <div className="flex-1 w-full md:pl-20 pb-20 md:pb-0 h-full overflow-hidden">
+            <div className="flex-1 w-full md:pl-20 pb-16 md:pb-0 h-full overflow-hidden bg-[#131413]">
                 <Outlet />
             </div>
         </div>
     )
 }
 
-export default MainLayout
+export default MainLayout;

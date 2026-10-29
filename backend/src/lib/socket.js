@@ -5,11 +5,19 @@ import express from "express";
 const app = express();
 const server = http.createServer(app);
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.CLIENT_URL,
+].filter(Boolean);
+
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173"],
+    origin: process.env.NODE_ENV === "production"
+      ? (process.env.CLIENT_URL ? [process.env.CLIENT_URL] : true)
+      : allowedOrigins,
+    credentials: true,
   },
-}); 
+});
 
 export function getReceiverSocketId(userId) {
   return userSocketMap[userId];

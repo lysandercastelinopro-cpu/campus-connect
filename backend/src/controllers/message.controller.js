@@ -1,6 +1,5 @@
 import { prisma } from "../lib/prisma.js";
-
-import cloudinary from "../lib/cloudinary.js"
+import cloudinary from "../lib/cloudinary.js";
 import { getReceiverSocketId, io } from "../lib/socket.js";
 
 export const getusersForSidebar = async (req, res) => {
@@ -30,6 +29,8 @@ export const getusersForSidebar = async (req, res) => {
         username: friend.username,
         name: friend.name,
         profilePic: friend.profilePic,
+        bio: friend.bio,
+        tags: friend.tags,
         createdAt: friend.createdAt,
         updatedAt: friend.updatedAt
       };
@@ -55,7 +56,7 @@ export const getMessages = async (req, res) => {
           { userId: userToChatIntId, followerId: myId }
         ]
       }
-    })
+    });
 
     res.status(200).json(messages);
   } catch (error) {
@@ -77,18 +78,45 @@ export const sendMessage = async (req, res) => {
       imageUrl = uploadResponse.secure_url;
     }
 
+    const targetReceiverId = parseInt(receiverId, 10);
+
     const newMessage = await prisma.chat.create({
       data: {
         userId,
-        followerId: parseInt(receiverId, 10),
+        followerId: targetReceiverId,
         text,
         image: imageUrl,
       }
-    })
+    });
 
-    const receiverSocketId = getReceiverSocketId(receiverId);
-    if (receiverSocketId) {
-      io.to(receiverSocketId).emit("newMessage", newMessage);
+    // Create system notification for message recipient
+    try {
+      const notification = await prisma.notification.create({
+        data: {
+          userId: targetReceiverId,
+          senderId: userId,
+          type: "MESSAGE",
+          content: text ? (text.length > 50 ? `${text.substring(0, 47)}...` : text) : "Sent an image",
+          read: false
+        },
+        include: {
+          sender: {
+            select: { id: true, name: true, username: true, profilePic: true }
+          }
+        }
+      });
+
+      const receiverSocketId = getReceiverSocketId(receiverId);
+      if (receiverSocketId) {
+        io.to(receiverSocketId).emit("newMessage", newMessage);
+        io.to(receiverSocketId).emit("newNotification", notification);
+      }
+    } catch (notifError) {
+      console.log("Error creating message notification:", notifError.message);
+      const receiverSocketId = getReceiverSocketId(receiverId);
+      if (receiverSocketId) {
+        io.to(receiverSocketId).emit("newMessage", newMessage);
+      }
     }
 
     res.status(201).json(newMessage);
